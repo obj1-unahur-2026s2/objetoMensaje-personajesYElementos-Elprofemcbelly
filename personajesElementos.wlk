@@ -5,7 +5,7 @@ object luisa {
 
     // Metodo de indicacion: cambia el estado de luisa.//
     // El parametro es el personaje nuevo (nombre exacto del glosario) que va a manejar.// 
-    method cambiarPersonaje(nuevoPersonaje) {
+    method cambiarJugador(nuevoPersonaje) {
         personajeActivo = nuevoPersonaje
     }
 
@@ -41,7 +41,18 @@ object floki {
 }
 
 object mario {
+    var valorRecolectado = 0
+    var ultimoElemento = aurora
 
+    method encontrar(unElemento) {
+        valorRecolectado = valorRecolectado + unElemento.valorOtorgado()
+        unElemento.recibirTrabajo()
+        ultimoElemento = unElemento
+    }
+
+    method estaFeliz() {
+        return valorRecolectado >= 50 or ultimoElemento.altura() >= 10
+    }
 }
 
 object ballesta {
@@ -83,7 +94,7 @@ object castillo {
         return 20
     }
 
-    method nivelDeDefensa() {
+    method nivelDeDefesa() {
         return defesa
     }
 
@@ -112,10 +123,32 @@ object aurora {
     method recibirAtaque(potencia) {
         if (potencia >= 10) {
             viva = false
-        }
+        } 
+    }
+
+    method valorOtorgado() {
+        return 15
+    }
+
+    method recibirTrabajo() {
     }
 }
 
 object tipa {
+    var altura = 8
 
+    method altura() {
+        return altura
+    }
+
+    method recibirAtaque(potencia) {
+    }
+
+    method recibirTrabajo() {
+        altura = altura + 1
+    }
+
+    method valorOtorgado() {
+        return altura * 2
+    }
 }
